@@ -14,7 +14,7 @@ import xyz.tonimartinez.cleanandroidapiclient.data.repository.api.exception.ApiN
 import xyz.tonimartinez.cleanandroidapiclient.data.repository.api.response.ResponseAddUser;
 import xyz.tonimartinez.cleanandroidapiclient.domain.model.Contact;
 import xyz.tonimartinez.cleanandroidapiclient.repository.contacts.datasource.ContactsApiDataSource;
-import xyz.tonimartinez.cleanandroidapiclient.repository.exception.RepositoryErrorException;
+import xyz.tonimartinez.cleanandroidapiclient.repository.exception.DatasourceErrorException;
 
 /**
  * Created by Toni Martinez on 2/12/15.
@@ -31,7 +31,7 @@ public class ContactsApiDataSourceImpl implements ContactsApiDataSource {
     }
 
     @Override
-    public Contact getContact(String id) throws RepositoryErrorException {
+    public Contact getContact(String id) throws DatasourceErrorException {
         try {
 
             ApiContact response = dataService.getUser(id);
@@ -42,13 +42,13 @@ public class ContactsApiDataSourceImpl implements ContactsApiDataSource {
         } catch (RetrofitError e) {
             throw processException(e);
         } catch (Throwable e) {
-            throw new RepositoryErrorException(new ApiErrorException(e));
+            throw new DatasourceErrorException(new ApiErrorException(e));
         }
     }
 
 
     @Override
-    public List<Contact> getContactsList() throws RepositoryErrorException {
+    public List<Contact> getContactsList() throws DatasourceErrorException {
         try {
 
             HashMap<String,ApiContact> response = dataService.listUsers();
@@ -57,12 +57,12 @@ public class ContactsApiDataSourceImpl implements ContactsApiDataSource {
         } catch (RetrofitError e) {
             throw processException(e);
         } catch (Throwable e) {
-            throw new RepositoryErrorException(new ApiErrorException(e));
+            throw new DatasourceErrorException(new ApiErrorException(e));
         }
     }
 
     @Override
-    public Contact addContact(Contact contact) throws RepositoryErrorException {
+    public Contact addContact(Contact contact) throws DatasourceErrorException {
         try {
 
             ApiContact apiContact = mapperApiContact.mapper(contact);
@@ -73,12 +73,12 @@ public class ContactsApiDataSourceImpl implements ContactsApiDataSource {
         } catch (RetrofitError e) {
             throw processException(e);
         } catch (Throwable e) {
-            throw new RepositoryErrorException(new ApiErrorException(e));
+            throw new DatasourceErrorException(new ApiErrorException(e));
         }
     }
 
     @Override
-    public Contact editContact(Contact contact) throws RepositoryErrorException {
+    public Contact editContact(Contact contact) throws DatasourceErrorException {
         try {
 
             ApiContact apiContact = mapperApiContact.mapper(contact);
@@ -88,12 +88,12 @@ public class ContactsApiDataSourceImpl implements ContactsApiDataSource {
         } catch (RetrofitError e) {
             throw processException(e);
         } catch (Throwable e) {
-            throw new RepositoryErrorException(new ApiErrorException(e));
+            throw new DatasourceErrorException(new ApiErrorException(e));
         }
     }
 
     @Override
-    public boolean deleteContact(String id) throws RepositoryErrorException {
+    public boolean deleteContact(String id) throws DatasourceErrorException {
         try {
 
             dataService.delUser(id);
@@ -102,18 +102,18 @@ public class ContactsApiDataSourceImpl implements ContactsApiDataSource {
         } catch (RetrofitError e) {
             throw processException(e);
         } catch (Throwable e) {
-            throw new RepositoryErrorException(new ApiErrorException(e));
+            throw new DatasourceErrorException(new ApiErrorException(e));
         }
     }
 
-    private RepositoryErrorException processException(RetrofitError e) throws RepositoryErrorException {
+    private DatasourceErrorException processException(RetrofitError e) throws DatasourceErrorException {
         if (RetrofitError.Kind.HTTP.equals(e.getKind())
                 || RetrofitError.Kind.NETWORK.equals(e.getKind())) {
-            throw new RepositoryErrorException(new ApiNetworkException(e));
+            throw new DatasourceErrorException(new ApiNetworkException(e));
         }
         if (RetrofitError.Kind.CONVERSION.equals(e.getKind())) {
-            throw new RepositoryErrorException(new ApiConversionException(e));
+            throw new DatasourceErrorException(new ApiConversionException(e));
         }
-        throw new RepositoryErrorException(new ApiErrorException(e));
+        throw new DatasourceErrorException(new ApiErrorException(e));
     }
 }

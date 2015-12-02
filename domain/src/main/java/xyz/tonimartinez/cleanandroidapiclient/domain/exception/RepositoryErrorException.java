@@ -1,11 +1,10 @@
-package xyz.tonimartinez.cleanandroidapiclient.repository.exception;
+package xyz.tonimartinez.cleanandroidapiclient.domain.exception;
 
 /**
  * Created by Toni Martinez on 2/12/15.
  * toni.martinez.carballo@gmail.com
  */
 public class RepositoryErrorException extends Exception {
-
     public RepositoryErrorException() {
     }
 

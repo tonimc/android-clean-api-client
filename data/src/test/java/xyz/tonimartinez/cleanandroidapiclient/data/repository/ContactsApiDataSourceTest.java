@@ -13,7 +13,7 @@ import xyz.tonimartinez.cleanandroidapiclient.domain.model.Contact;
 import xyz.tonimartinez.cleanandroidapiclient.domain.model.Location;
 import xyz.tonimartinez.cleanandroidapiclient.domain.model.Picture;
 import xyz.tonimartinez.cleanandroidapiclient.repository.contacts.datasource.ContactsApiDataSource;
-import xyz.tonimartinez.cleanandroidapiclient.repository.exception.RepositoryErrorException;
+import xyz.tonimartinez.cleanandroidapiclient.repository.exception.DatasourceErrorException;
 
 /**
  * Created by Toni Martinez on 2/12/15.
@@ -34,7 +34,7 @@ public class ContactsApiDataSourceTest {
             List<Contact> contactList = contactsApiDataSource.getContactsList();
             Assert.assertNotNull(contactList);
             Assert.assertTrue(contactList.size() > 0);
-        } catch (RepositoryErrorException e) {
+        } catch (DatasourceErrorException e) {
             Assert.fail();
         }
     }
@@ -47,7 +47,7 @@ public class ContactsApiDataSourceTest {
 
             Contact contact = contactsApiDataSource.getContact(CONTACT_ID);
             Assert.assertEquals(contact.getEmail(), EMAIL);
-        } catch (RepositoryErrorException e) {
+        } catch (DatasourceErrorException e) {
             Assert.fail();
         }
     }
@@ -59,7 +59,7 @@ public class ContactsApiDataSourceTest {
 
             Contact contact = contactsApiDataSource.getContact(CONTACT_ID);
             Assert.assertNull(contact);
-        } catch (RepositoryErrorException e) {
+        } catch (DatasourceErrorException e) {
             Assert.fail();
         }
     }
@@ -72,7 +72,7 @@ public class ContactsApiDataSourceTest {
 
             Contact testAddContact = contactsApiDataSource.getContact(contact.getId());
             Assert.assertEquals(contact.getEmail(), testAddContact.getEmail());
-        } catch (RepositoryErrorException e) {
+        } catch (DatasourceErrorException e) {
             Assert.fail();
         }
     }
@@ -93,7 +93,7 @@ public class ContactsApiDataSourceTest {
             Contact testEditContact = contactsApiDataSource.getContact(contact.getId());
             Assert.assertEquals(EMAIL, testEditContact.getEmail());
 
-        } catch (RepositoryErrorException e) {
+        } catch (DatasourceErrorException e) {
             Assert.fail();
         }
     }
@@ -110,7 +110,7 @@ public class ContactsApiDataSourceTest {
             testAddContact = contactsApiDataSource.getContact(contact.getId());
             Assert.assertNull(testAddContact);
 
-        } catch (RepositoryErrorException e) {
+        } catch (DatasourceErrorException e) {
             Assert.fail();
         }
     }
