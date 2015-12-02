@@ -13,6 +13,21 @@ buildscript {
 }
 
 allprojects {
+
+    ext {
+        // Project config
+        apiUrl = '"https://users-gdgourense.firebaseio.com"'
+
+        // Android config
+        androidBuildToolsVersion = '23.0.2'
+        androidMinSdkVersion = 17
+        androidTargetSdkVersion = 23
+        androidCompileSdkVersion = 23
+        androidApplicationId = 'xyz.tonimartinez.cleanandroidapiclient'
+        androidVersionCode = 1
+        androidVersionName = '0.1'
+    }
+
     repositories {
         jcenter()
     }

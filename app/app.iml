@@ -84,8 +84,6 @@
     <orderEntry type="library" exported="" name="support-v4-23.1.1" level="project" />
     <orderEntry type="library" exported="" name="design-23.1.1" level="project" />
     <orderEntry type="library" exported="" name="appcompat-v7-23.1.1" level="project" />
-    <orderEntry type="module" module-name="data" exported="" />
-    <orderEntry type="module" module-name="repository" exported="" />
     <orderEntry type="module" module-name="domain" exported="" />
   </component>
 </module>
