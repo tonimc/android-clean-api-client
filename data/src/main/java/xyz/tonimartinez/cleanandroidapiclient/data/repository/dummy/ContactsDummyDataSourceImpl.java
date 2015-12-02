@@ -12,7 +12,7 @@ import xyz.tonimartinez.cleanandroidapiclient.domain.model.Picture;
  * Created by Toni Martinez on 30/11/15.
  * toni.martinez.carballo@gmail.com
  */
-public class ContactsDummyDataSourceImpl  {
+public class ContactsDummyDataSourceImpl Impl {
 
     private List<Contact> contactList = new ArrayList<>(2);
 

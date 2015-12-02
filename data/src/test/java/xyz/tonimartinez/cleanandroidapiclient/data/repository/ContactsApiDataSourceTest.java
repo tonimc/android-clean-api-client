@@ -21,17 +21,17 @@ import xyz.tonimartinez.cleanandroidapiclient.repository.exception.RepositoryErr
  */
 public class ContactsApiDataSourceTest {
 
-    private ContactsApiDataSource contactsDummyDataSource;
+    private ContactsApiDataSource contactsApiDataSource;
 
     @Before
     public void setUp() {
-        contactsDummyDataSource = new ContactsApiDataSourceImpl();
+        contactsApiDataSource = new ContactsApiDataSourceImpl();
     }
 
     @Test
     public void testGetContactList() {
         try {
-            List<Contact> contactList = contactsDummyDataSource.getContactsList();
+            List<Contact> contactList = contactsApiDataSource.getContactsList();
             Assert.assertNotNull(contactList);
             Assert.assertTrue(contactList.size() > 0);
         } catch (RepositoryErrorException e) {
@@ -45,7 +45,7 @@ public class ContactsApiDataSourceTest {
             final String CONTACT_ID = "-K4UQQaYwd7RHVdZoOCI";
             final String EMAIL = "roberto.martin@example.com";
 
-            Contact contact = contactsDummyDataSource.getContact(CONTACT_ID);
+            Contact contact = contactsApiDataSource.getContact(CONTACT_ID);
             Assert.assertEquals(contact.getEmail(), EMAIL);
         } catch (RepositoryErrorException e) {
             Assert.fail();
@@ -57,7 +57,7 @@ public class ContactsApiDataSourceTest {
         try {
             final String CONTACT_ID = "fake-test";
 
-            Contact contact = contactsDummyDataSource.getContact(CONTACT_ID);
+            Contact contact = contactsApiDataSource.getContact(CONTACT_ID);
             Assert.assertNull(contact);
         } catch (RepositoryErrorException e) {
             Assert.fail();
@@ -68,9 +68,9 @@ public class ContactsApiDataSourceTest {
     public void testAddContact() {
         try {
             Contact contact = createTestContact(null);
-            contactsDummyDataSource.addContact(contact);
+            contactsApiDataSource.addContact(contact);
 
-            Contact testAddContact = contactsDummyDataSource.getContact(contact.getId());
+            Contact testAddContact = contactsApiDataSource.getContact(contact.getId());
             Assert.assertEquals(contact.getEmail(), testAddContact.getEmail());
         } catch (RepositoryErrorException e) {
             Assert.fail();
@@ -83,14 +83,14 @@ public class ContactsApiDataSourceTest {
             final String EMAIL = "roberto.martin@example.com";
 
             Contact contact = createTestContact(null);
-            contact = contactsDummyDataSource.addContact(contact);
+            contact = contactsApiDataSource.addContact(contact);
 
             Assert.assertNotEquals(EMAIL, contact.getEmail());
 
             contact.setEmail(EMAIL);
-            contactsDummyDataSource.editContact(contact);
+            contactsApiDataSource.editContact(contact);
 
-            Contact testEditContact = contactsDummyDataSource.getContact(contact.getId());
+            Contact testEditContact = contactsApiDataSource.getContact(contact.getId());
             Assert.assertEquals(EMAIL, testEditContact.getEmail());
 
         } catch (RepositoryErrorException e) {
@@ -102,12 +102,12 @@ public class ContactsApiDataSourceTest {
     public void testDeleteContact() {
         try {
             Contact contact = createTestContact(null);
-            contact = contactsDummyDataSource.addContact(contact);
-            Contact testAddContact = contactsDummyDataSource.getContact(contact.getId());
+            contact = contactsApiDataSource.addContact(contact);
+            Contact testAddContact = contactsApiDataSource.getContact(contact.getId());
             Assert.assertNotNull(testAddContact);
 
-            contactsDummyDataSource.deleteContact(contact.getId());
-            testAddContact = contactsDummyDataSource.getContact(contact.getId());
+            contactsApiDataSource.deleteContact(contact.getId());
+            testAddContact = contactsApiDataSource.getContact(contact.getId());
             Assert.assertNull(testAddContact);
 
         } catch (RepositoryErrorException e) {
