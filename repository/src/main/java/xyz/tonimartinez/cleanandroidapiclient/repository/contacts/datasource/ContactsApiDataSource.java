@@ -13,5 +13,6 @@ public interface ContactsApiDataSource {
     Contact getContact(String id) throws RepositoryErrorException;
     List<Contact> getContactsList() throws RepositoryErrorException;
     Contact addContact(Contact contact) throws RepositoryErrorException;
-    boolean deleteContact(Contact contact) throws RepositoryErrorException;
+    Contact editContact(Contact contact) throws RepositoryErrorException;
+    boolean deleteContact(String id) throws RepositoryErrorException;
 }

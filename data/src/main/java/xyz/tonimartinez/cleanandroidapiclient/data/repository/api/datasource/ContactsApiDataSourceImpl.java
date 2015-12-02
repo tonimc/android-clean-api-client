@@ -35,41 +35,27 @@ public class ContactsApiDataSourceImpl implements ContactsApiDataSource {
         try {
 
             ApiContact response = dataService.getUser(id);
-            return mapperApiContact.mapper(response);
+            return ( response != null )?
+                    mapperApiContact.mapper(response, id):
+                    null;
 
         } catch (RetrofitError e) {
-            if (RetrofitError.Kind.HTTP.equals(e.getKind())
-                    || RetrofitError.Kind.NETWORK.equals(e.getKind())) {
-                throw new RepositoryErrorException(new ApiNetworkException(e));
-            }
-            if (RetrofitError.Kind.CONVERSION.equals(e.getKind())) {
-                throw new RepositoryErrorException(new ApiConversionException(e));
-            }
-            throw new RepositoryErrorException(new ApiErrorException(e));
-
+            throw processException(e);
         } catch (Throwable e) {
             throw new RepositoryErrorException(new ApiErrorException(e));
         }
-
     }
+
 
     @Override
     public List<Contact> getContactsList() throws RepositoryErrorException {
         try {
 
             HashMap<String,ApiContact> response = dataService.listUsers();
-            return mapperApiContact.mapperList(response.values());
+            return mapperApiContact.mapperList(response);
 
         } catch (RetrofitError e) {
-            if (RetrofitError.Kind.HTTP.equals(e.getKind())
-                    || RetrofitError.Kind.NETWORK.equals(e.getKind())) {
-                throw new RepositoryErrorException(new ApiNetworkException(e));
-            }
-            if (RetrofitError.Kind.CONVERSION.equals(e.getKind())) {
-                throw new RepositoryErrorException(new ApiConversionException(e));
-            }
-            throw new RepositoryErrorException(new ApiErrorException(e));
-
+            throw processException(e);
         } catch (Throwable e) {
             throw new RepositoryErrorException(new ApiErrorException(e));
         }
@@ -78,21 +64,14 @@ public class ContactsApiDataSourceImpl implements ContactsApiDataSource {
     @Override
     public Contact addContact(Contact contact) throws RepositoryErrorException {
         try {
+
             ApiContact apiContact = mapperApiContact.mapper(contact);
             ResponseAddUser response = dataService.addUser(apiContact);
             contact.setId(response.getName());
             return contact;
 
         } catch (RetrofitError e) {
-            if (RetrofitError.Kind.HTTP.equals(e.getKind())
-                    || RetrofitError.Kind.NETWORK.equals(e.getKind())) {
-                throw new RepositoryErrorException(new ApiNetworkException(e));
-            }
-            if (RetrofitError.Kind.CONVERSION.equals(e.getKind())) {
-                throw new RepositoryErrorException(new ApiConversionException(e));
-            }
-            throw new RepositoryErrorException(new ApiErrorException(e));
-
+            throw processException(e);
         } catch (Throwable e) {
             throw new RepositoryErrorException(new ApiErrorException(e));
         }
@@ -100,11 +79,41 @@ public class ContactsApiDataSourceImpl implements ContactsApiDataSource {
 
     @Override
     public Contact editContact(Contact contact) throws RepositoryErrorException {
-        return null;
+        try {
+
+            ApiContact apiContact = mapperApiContact.mapper(contact);
+            ApiContact response = dataService.editUser(contact.getId(), apiContact);
+            return mapperApiContact.mapper(response, contact.getId());
+
+        } catch (RetrofitError e) {
+            throw processException(e);
+        } catch (Throwable e) {
+            throw new RepositoryErrorException(new ApiErrorException(e));
+        }
     }
 
     @Override
-    public boolean deleteContact(Contact contact) throws RepositoryErrorException {
-        return false;
+    public boolean deleteContact(String id) throws RepositoryErrorException {
+        try {
+
+            dataService.delUser(id);
+            return true;
+
+        } catch (RetrofitError e) {
+            throw processException(e);
+        } catch (Throwable e) {
+            throw new RepositoryErrorException(new ApiErrorException(e));
+        }
+    }
+
+    private RepositoryErrorException processException(RetrofitError e) throws RepositoryErrorException {
+        if (RetrofitError.Kind.HTTP.equals(e.getKind())
+                || RetrofitError.Kind.NETWORK.equals(e.getKind())) {
+            throw new RepositoryErrorException(new ApiNetworkException(e));
+        }
+        if (RetrofitError.Kind.CONVERSION.equals(e.getKind())) {
+            throw new RepositoryErrorException(new ApiConversionException(e));
+        }
+        throw new RepositoryErrorException(new ApiErrorException(e));
     }
 }

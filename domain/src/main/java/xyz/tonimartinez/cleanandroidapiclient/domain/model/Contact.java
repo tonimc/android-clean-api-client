@@ -7,7 +7,6 @@ import java.util.Date;
  * toni.martinez.carballo@gmail.com
  */
 public class Contact {
-
     private String id;
     private String gender;
     private String firstName;

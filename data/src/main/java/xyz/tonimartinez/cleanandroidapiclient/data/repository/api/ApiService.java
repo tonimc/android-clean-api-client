@@ -30,7 +30,7 @@ public interface ApiService {
     @PUT("/users/{id}/.json")
     ApiContact editUser(@Path("id") String id, @Body ApiContact user);
 
-    @DELETE("/users.json")
-    Object delUser();
+    @DELETE("/users/{id}/.json")
+    Object delUser(@Path("id") String id);
 
 }
