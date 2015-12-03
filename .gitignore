@@ -29,3 +29,6 @@ proguard/
 /.idea/workspace.xml
 /.idea/libraries
 .DS_Store
+
+# Profile files java
+java_pid*

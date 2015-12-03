@@ -23,6 +23,7 @@ public class ApiServerRetrofit {
 
     private static ApiService apiService;
 
+
     public static ApiService getApi() {
         if ( apiService == null) {
             synchronized (ApiServerRetrofit.class) {

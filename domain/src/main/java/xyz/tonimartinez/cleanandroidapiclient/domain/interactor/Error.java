@@ -5,6 +5,5 @@ package xyz.tonimartinez.cleanandroidapiclient.domain.interactor;
  * toni.martinez.carballo@gmail.com
  */
 public interface Error {
-    public String getCode();
     public String getText();
 }

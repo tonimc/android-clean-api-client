@@ -2,8 +2,6 @@ package xyz.tonimartinez.cleanandroidapiclient.repository.contacts;
 
 import java.util.List;
 
-import xyz.tonimartinez.cleanandroidapiclient.data.repository.api.datasource.ContactsApiDataSourceImpl;
-import xyz.tonimartinez.cleanandroidapiclient.data.repository.api.datasource.ContactsApiDummyDataSourceImpl;
 import xyz.tonimartinez.cleanandroidapiclient.domain.exception.RepositoryErrorException;
 import xyz.tonimartinez.cleanandroidapiclient.domain.model.Contact;
 import xyz.tonimartinez.cleanandroidapiclient.domain.repository.ContactsRepository;
@@ -18,9 +16,8 @@ public class ContactsRepositoryImpl implements ContactsRepository {
 
     ContactsApiDataSource contactsApiDataSource;
 
-    public ContactsRepositoryImpl() {
-        this.contactsApiDataSource = new ContactsApiDataSourceImpl();
-        //this.contactsApiDataSource = new ContactsApiDummyDataSourceImpl();
+    public ContactsRepositoryImpl(ContactsApiDataSource contactsApiDataSource) {
+        this.contactsApiDataSource = contactsApiDataSource;
     }
 
     @Override

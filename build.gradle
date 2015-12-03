@@ -5,7 +5,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:1.5.0'
+        classpath 'com.android.tools.build:gradle:2.0.0-alpha1'
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
@@ -15,12 +15,9 @@ buildscript {
 allprojects {
 
     ext {
-        // Project config
-        apiUrl = '"https://users-gdgourense.firebaseio.com"'
-
         // Android config
         androidBuildToolsVersion = '23.0.2'
-        androidMinSdkVersion = 17
+        androidMinSdkVersion = 16
         androidTargetSdkVersion = 23
         androidCompileSdkVersion = 23
         androidApplicationId = 'xyz.tonimartinez.cleanandroidapiclient'

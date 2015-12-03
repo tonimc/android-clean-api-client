@@ -36,20 +36,20 @@ public class ContactsApiDummyDataSourceImpl implements ContactsApiDataSource {
         contact1.setPicture(picture);
 
         Picture picture2 = new Picture();
-        picture.setThumbnail("http://www.autofacil.es/elementosWeb/gestionCajas/AUF/Image/Dummy.jpg");
-        picture.setPicture("http://www.autofacil.es/elementosWeb/gestionCajas/AUF/Image/Dummy.jpg");
+        picture2.setThumbnail("http://www.autofacil.es/elementosWeb/gestionCajas/AUF/Image/Dummy.jpg");
+        picture2.setPicture("http://www.autofacil.es/elementosWeb/gestionCajas/AUF/Image/Dummy.jpg");
 
         Contact contact2 = new Contact();
-        contact1.setId("2");
-        contact1.setEmail("contacto2@dummy.es");
-        contact1.setFirstName("Dummy 2");
-        contact1.setLastName("Test");
-        contact1.setCell("999-888-777");
-        contact1.setDNI("99999999R");
-        contact1.setDob(new Date());
-        contact1.setGender("Male");
-        contact1.setLocation(new Location());
-        contact1.setPicture(picture2);
+        contact2.setId("2");
+        contact2.setEmail("contacto2@dummy.es");
+        contact2.setFirstName("Dummy 2");
+        contact2.setLastName("Test");
+        contact2.setCell("999-888-777");
+        contact2.setDNI("99999999R");
+        contact2.setDob(new Date());
+        contact2.setGender("Male");
+        contact2.setLocation(new Location());
+        contact2.setPicture(picture2);
 
         contactList.add(contact1);
         contactList.add(contact2);

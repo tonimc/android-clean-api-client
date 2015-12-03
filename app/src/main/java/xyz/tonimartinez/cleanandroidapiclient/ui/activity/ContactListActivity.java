@@ -1,54 +1,73 @@
 package xyz.tonimartinez.cleanandroidapiclient.ui.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.view.Menu;
-import android.view.MenuItem;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import butterknife.Bind;
 import xyz.tonimartinez.cleanandroidapiclient.R;
+import xyz.tonimartinez.cleanandroidapiclient.ui.adapter.ContactsAdapter;
+import xyz.tonimartinez.cleanandroidapiclient.ui.presenter.ContactListPresenter;
+import xyz.tonimartinez.cleanandroidapiclient.ui.presenter.dto.ContactDTO;
+import xyz.tonimartinez.cleanandroidapiclient.ui.presenter.view.ContactListView;
 
-public class ContactListActivity extends AppCompatActivity {
+public class ContactListActivity extends BaseActivity implements ContactListView {
+
+    @Bind(R.id.toolbar) protected Toolbar mToolbar;
+    @Bind(R.id.contact_list_RV) protected RecyclerView mProductsListRV;
+    @Bind(R.id.add_contact) FloatingActionButton mAddContactBT;
+
+    private ContactsAdapter mContactsAdapter;
+
+    private ContactListPresenter contactListPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_contact_list);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+        contactListPresenter = new ContactListPresenter(this);
+        setupLayout();
+        contactListPresenter.getContactList();
+    }
+
+    private void setupLayout() {
+        mAddContactBT.setVisibility(View.GONE);
+
+        mContactsAdapter = new ContactsAdapter(new ArrayList<ContactDTO>());
+        mContactsAdapter.setOnItemClickListener(new ContactsAdapter.OnItemClickListener() {
             @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+            public void onClick(ContactDTO item) {
+                Intent intent = ContactDetailActivity.navigate(ContactListActivity.this, item.getId());
+                startActivity(intent);
             }
         });
+
+        mProductsListRV.setLayoutManager(new GridLayoutManager(this, 2));
+        mProductsListRV.setHasFixedSize(true);
+        mProductsListRV.setAdapter(mContactsAdapter);
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_contact_list, menu);
-        return true;
+    protected int getActivityLayout() {
+        return R.layout.activity_contact_list;
+    }
+
+
+    @Override
+    public void renderContactList(List<ContactDTO> contactDTOList) {
+        mContactsAdapter.clear();
+        mContactsAdapter.addAll(contactDTOList);
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+    public void openContact() {
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 }

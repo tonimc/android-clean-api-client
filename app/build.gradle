@@ -1,8 +1,5 @@
 apply plugin: 'com.android.application'
 
-def STRING = "String"
-def BOOLEAN = "boolean"
-
 android {
     compileSdkVersion parent.ext.androidCompileSdkVersion
     buildToolsVersion parent.ext.androidBuildToolsVersion
@@ -14,16 +11,13 @@ android {
         versionCode parent.ext.androidVersionCode
         versionName parent.ext.androidVersionName
 
-        buildConfigField STRING, "API_URL", project.ext.apiUrl
+        buildConfigField "String", "API_TYPE", '"dummy"'
     }
 
     buildTypes {
         debug {
-            buildConfigField BOOLEAN, "RETROFIT_LOG", "true"
         }
         release {
-            buildConfigField BOOLEAN, "RETROFIT_LOG", "false"
-
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
@@ -38,11 +32,13 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile project(':domain')
     testCompile 'junit:junit:4.12'
-
     compile 'com.android.support:appcompat-v7:23.1.1'
     compile 'com.android.support:design:23.1.1'
+    compile 'com.jakewharton:butterknife:7.0.1'
+    compile 'com.squareup.picasso:picasso:2.5.2'
 
-
+    compile project(':domain')
+    compile project(':repository')
+    compile project(':data')
 }
