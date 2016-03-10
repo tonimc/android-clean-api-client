@@ -63,13 +63,13 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/margin_medium"
                 android:background="@drawable/bottom_line"
-                android:text="@string/contact_name" />
+                tools:text="@string/contact_name" />
 
             <TextView
                 android:id="@+id/contact_body"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                tools:history="@string/contact_name" />
+                tools:text="@string/contact_name" />
 
         </LinearLayout>
 

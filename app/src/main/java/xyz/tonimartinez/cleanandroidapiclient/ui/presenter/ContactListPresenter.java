@@ -20,7 +20,6 @@ public class ContactListPresenter {
 
     private ContactListView view;
 
-
     private GetContactsList getContactsListInteractor;
     private MapperContactDTO mapperContactDTO;
 

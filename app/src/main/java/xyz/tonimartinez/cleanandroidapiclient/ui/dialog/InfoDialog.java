@@ -10,7 +10,6 @@ import android.view.View;
 import xyz.tonimartinez.cleanandroidapiclient.R;
 
 /**
- * Created by Toni Martinez on 23/10/15.
  * toni.martinez.carballo@gmail.com
  */
 public class InfoDialog extends DialogFragment {

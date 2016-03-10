@@ -25,9 +25,7 @@
         android:id="@+id/contact_list_RV"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_marginTop="?android:attr/actionBarSize"/>
-
+        android:layout_marginTop="?attr/actionBarSize" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/add_contact"

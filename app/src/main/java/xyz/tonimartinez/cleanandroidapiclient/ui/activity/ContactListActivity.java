@@ -40,6 +40,11 @@ public class ContactListActivity extends BaseActivity implements ContactListView
     private void setupLayout() {
         mAddContactBT.setVisibility(View.GONE);
 
+        setSupportActionBar(mToolbar);
+        if ( getSupportActionBar() != null ) {
+            getSupportActionBar().setTitle(R.string.app_name);
+        }
+
         mContactsAdapter = new ContactsAdapter(new ArrayList<ContactDTO>());
         mContactsAdapter.setOnItemClickListener(new ContactsAdapter.OnItemClickListener() {
             @Override
