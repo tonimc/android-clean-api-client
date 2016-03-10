@@ -11,14 +11,14 @@ android {
         versionCode parent.ext.androidVersionCode
         versionName parent.ext.androidVersionName
 
-        buildConfigField "String", "API_TYPE", '"dummy"'
+        buildConfigField "String", "API_TYPE", '"DUMMY"'
     }
 
     buildTypes {
         debug {
         }
         release {
-            minifyEnabled true
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
