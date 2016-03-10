@@ -10,9 +10,6 @@ import xyz.tonimartinez.cleanandroidapiclient.repository.contacts.datasource.Con
  */
 public class DataModule {
 
-    private static String API_DUMMY = "dummy";
-    private static String API_REST = "rest";
-
     public static ContactsApiDataSource provideContatsApiDataSource() {
         //return new ContactsApiDummyDataSourceImpl();
         return new ContactsApiDataSourceImpl();

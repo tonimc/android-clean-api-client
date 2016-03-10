@@ -1,19 +1,14 @@
 package xyz.tonimartinez.cleanandroidapiclient.ui.presenter;
 
-import java.util.List;
-
 import xyz.tonimartinez.cleanandroidapiclient.di.RepositoryModule;
 import xyz.tonimartinez.cleanandroidapiclient.domain.executor.ExecutorProvider;
 import xyz.tonimartinez.cleanandroidapiclient.domain.interactor.Error;
 import xyz.tonimartinez.cleanandroidapiclient.domain.interactor.contacts.GetContact;
 import xyz.tonimartinez.cleanandroidapiclient.domain.interactor.contacts.GetContactInteractor;
-import xyz.tonimartinez.cleanandroidapiclient.domain.interactor.contacts.GetContactsList;
-import xyz.tonimartinez.cleanandroidapiclient.domain.interactor.contacts.GetContactsListInteractor;
 import xyz.tonimartinez.cleanandroidapiclient.domain.model.Contact;
 import xyz.tonimartinez.cleanandroidapiclient.domain.repository.ContactsRepository;
 import xyz.tonimartinez.cleanandroidapiclient.ui.presenter.dto.mapper.MapperContactDTO;
 import xyz.tonimartinez.cleanandroidapiclient.ui.presenter.view.ContactDetailView;
-import xyz.tonimartinez.cleanandroidapiclient.ui.presenter.view.ContactListView;
 
 /**
  * Created by Toni Martinez on 2/12/15.

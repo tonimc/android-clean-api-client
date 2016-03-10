@@ -1,6 +1,5 @@
 package xyz.tonimartinez.cleanandroidapiclient.data.repository;
 
-
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -72,6 +71,8 @@ public class ContactsApiDataSourceTest {
 
             Contact testAddContact = contactsApiDataSource.getContact(contact.getId());
             Assert.assertEquals(contact.getEmail(), testAddContact.getEmail());
+
+            contactsApiDataSource.deleteContact(contact.getId());
         } catch (DatasourceErrorException e) {
             Assert.fail();
         }
@@ -93,6 +94,7 @@ public class ContactsApiDataSourceTest {
             Contact testEditContact = contactsApiDataSource.getContact(contact.getId());
             Assert.assertEquals(EMAIL, testEditContact.getEmail());
 
+            contactsApiDataSource.deleteContact(contact.getId());
         } catch (DatasourceErrorException e) {
             Assert.fail();
         }
